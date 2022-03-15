@@ -21,11 +21,11 @@ ll RAND(ll l, ll h)
     ret = ret % (h - l + 1) + l;
     return ret;
 }
-vector<float> random_arr()
+vector<int> random_arr()
 {
-    vector<float> arr(maxn);
+    vector<int> arr(maxn);
     for(int i=0;i<maxn;i++)
-        arr[i] = (float)RAND(-inf,inf)*1.0/RAND(1,100);
+        arr[i] = RAND(-inf,inf);
     return arr;
 }
 string tostring(int x)
@@ -44,11 +44,11 @@ int main()
     {
         string name = "input" + tostring(itest) + ".inp";
         ofstream output(name);
-        vector<float> cur;
+        vector<int> cur;
         cur = random_arr();
         switch(itest){
             case 1: {sort(cur.begin(),cur.end());break;}
-            case 2: {sort(cur.begin(),cur.end(),greater<float>());break;}
+            case 2: {sort(cur.begin(),cur.end(),greater<int>());break;}
         }
         for(int i=0 ; i < maxn ; i++)
             output<<fixed<<cur[i]<<" ";
