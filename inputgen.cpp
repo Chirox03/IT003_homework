@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define mid ((l+r)/2)
-#define inf (ll)1e5
+#define inf (ll)1e9
 #define maxn 1000000
 #define mod (ll)(1e9+7)
 #define pi pair<ll,ll>

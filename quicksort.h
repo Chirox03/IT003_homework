@@ -1,29 +1,37 @@
-#include <bits/stdc++.h>
-
-#define ll long long
+#include <iostream>
 
 using namespace std;
 
-void quicksort(int a[], int l, int r)
+void quicksort(int arr[], int l , int r)
 {
-    int mid = (l + r) / 2;
-    ll x = a[mid];
-    int i = l, j = r;
-    do
-    {
-        while (a[i] < x && i <= j) i++;
-        while (a[j] > x && j >= i) j--;
-        if (i <= j)
-        {
-            swap(a[i], a[j]);
-            i++; j--;
-        }
-    } while (i <= j);
-    if (i < r) quicksort(a, i, r);
-    if (l < j) quicksort(a, l, j);
+	if (l <= r)
+	{
+		int key = arr[(l+r)/2];
+		int i = l;
+		int j = r;
+
+		while (i <= j)
+		{
+			while (arr[i] < key)
+				i++;
+			while (arr[j] > key)
+				j--;
+
+			if (i <= j)
+			{
+				swap(arr[i], arr[j]);
+				i++;
+				j--;
+			}
+		}
+		if (l < j)
+			quicksort(arr, l, j);
+		if (r > i)
+			quicksort(arr, i, r);
+	}
 }
 
 void quickSort(int a[], int n)
 {
-    quicksort(a,0,n);
+    quicksort(a,0,n-1);
 }

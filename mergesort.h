@@ -1,43 +1,38 @@
-#ifndef MERGESORT_H_INCLUDED
-#define MERGESORT_H_INCLUDED
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+
 using namespace std;
-void merge(int a[], int l[], int nL, int r[], int nR)
+
+int L[1000000], R[1000000];
+
+void merge(int a[], int l, int m, int r)
 {
-    // int nL = sizeof(l)/sizeof(int);
-    // int nR = sizeof(r)/sizeof(int);
-    int i=0,j=0,k=0;
-    while(i < nL && j < nR)
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    for (i = 0; i < n1; i++) L[i] = a[l + i];
+    for (j = 0; j < n2; j++) R[j] = a[m + 1 + j];
+    i = j = 0;
+    k = l;
+    while (i < n1 && j < n2)
     {
-        if(l[i] < r[j])
-            a[k++] = l[i++];
-        else
-            a[k++] = r[j++];
+        if (L[i] <= R[j]) a[k] = L[i++];
+        else a[k] = R[j++];
+        k++;
     }
-    while(i < nL)
-    {
-        a[k++] = l[i++];
-    }
-    while(j < nR)
-    {
-        a[k++] = r[j++];
-    }
+    while (i < n1) a[k++] = L[i++];
+    while (j < n2) a[k++] = R[j++];
 }
 
-void mergesort(int a[], int len)
+void mergeSort(int a[], int l, int r)
 {
-    if(len<2)
-        return;
-    int mid = len/2;
-    int *left = (int *)malloc(mid*sizeof(int));
-    int *right = (int *)malloc(sizeof(int)*(len-mid));
-    for(int i=0;i<mid;i++)
-        left[i] = a[i];
-    for(int i=mid;i<len;i++)
-        right[i-mid] = a[i];
-    mergesort(left, mid);
-    mergesort(right, len-mid);
-    merge(a, left, mid, right, len-mid);
+    if (l >= r) return ;
+    int mid = (l + r) / 2;
+    mergeSort(a, l, mid);
+    mergeSort(a, mid+1, r);
+    merge(a, l, mid, r);
 }
-#endif // MERGESORT_H_INCLUDED
+
+void mergesort(int a[], int n)
+{
+    mergeSort(a,0,n-1);
+}

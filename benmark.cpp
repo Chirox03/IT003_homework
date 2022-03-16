@@ -12,7 +12,7 @@
 #include "csort.h"
 #include "quicksort.h"
 using namespace std;
-int a[maxn+1],arr[maxn+1];
+int ra[maxn+1],arr[maxn+1];
 void Boost()
 {
     ios_base::sync_with_stdio(0);
@@ -33,21 +33,22 @@ void test_input(int iTest)
     ifstream input(name);
     for(int i=0; i<maxn; i++)
     {
-        input>>a[i];
+        input>>ra[i];
     }
     input.close();
 }
 double sofamark(void (*func)(int array[], int n))
 {
     for (int i = 0; i < maxn; i++)
-        arr[i] = a[i];
+        arr[i] = ra[i];
     clock_t time_begin = clock();
-    func(a,maxn-1);
+    func(arr,maxn);
     clock_t time_end = clock();
     return double(time_end - time_begin) / CLOCKS_PER_SEC * 1000;
 }
 int main()
 {
+    Boost();
     ofstream output("result.txt");
     output<<"Test"<<'\t'<<"Quicksort"<<'\t'<<"Heapsort"<<'\t'<<"Mergesort"<<'\t'<<"csort"<<'\n';
     for(int iTest = 1; iTest <=10; iTest++)
@@ -56,7 +57,7 @@ int main()
         output<<iTest<<'\t'<<setw(8);
         output<<sofamark(quickSort)<<"\t"<<setw(8);
         output<<sofamark(heapSort)<<"\t"<<setw(8);
-        output<<sofamark(mergesort)<<"\t"<<setw(5);
+        output<<sofamark(mergesort)<<"\t"<<setw(6);
         output<<sofamark(csort)<<'\n';
 
     }
